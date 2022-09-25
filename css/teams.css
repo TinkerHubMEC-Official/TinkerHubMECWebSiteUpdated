@@ -1,9 +1,4 @@
-#gallery-container {
-    max-width:200rem;
-    margin: 0px auto;
-    padding: 0 2rem 2rem;
-  }
-  
+
   .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -11,9 +6,8 @@
     margin: -1rem -1rem;
   }
   
-  .gallery-item {
+  .gallery-item-1 {
     /* Minimum width of 24rem and grow to fit available space */
-    flex: 1 0   39rem;
     /* Margin value should be half of grid-gap value as margins on flex items don't collapse */
     margin: 1rem;
     box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
@@ -30,4 +24,29 @@
   
   .gallery-image:hover {
     transform: scale(1.15);
+  }
+  @media (max-width:768px) {
+    .gallery
+    {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .gallery-image {
+      display: block;
+      object-fit: cover;
+      justify-content: center;
+      transition: transform 400ms ease-out;
+    }
+    .gallery-item-1 {
+      display: flex;
+      width: 90%;
+      height: 90%;
+      align-items: center;
+      box-shadow: none;
+      box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+justify-content: center;
+      margin: 0;
+      margin-bottom: 40px;
+    }
   }
