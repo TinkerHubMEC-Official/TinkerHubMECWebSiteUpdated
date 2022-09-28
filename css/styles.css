@@ -3,19 +3,6 @@
   margin: 0px auto;
   padding: 0 2rem 2rem;
 }
-
-.navbar-container-scroll
-{
-  background-image: linear-gradient(90deg, #f3b500, #f3b500);
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  z-index: 200;
-  width: 100%;
-  height: 82px;
-  border-bottom: 2px solid #fff;
-  background-color: #fff;
-}
 .gallery {
   display: flex;
   flex-wrap: wrap;
