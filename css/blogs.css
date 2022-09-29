@@ -13,11 +13,11 @@
   
   .blog {
     height: 490px;
+    width: 350px;
     transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     box-shadow: 10px 10px 5px  rgba(17, 17, 17, 0.342);
     -webkit-transition: all 0.3s ease-in-out;
-    border: 5px solid #111;
     filter: drop-shadow(23px 24px 36px rgb(255, 255, 255));
   }
   
@@ -91,7 +91,7 @@
   .image img {
     object-fit: cover;
     width: 350px;
-    height: 349px;
+    height: 40%;
   }
   
   
