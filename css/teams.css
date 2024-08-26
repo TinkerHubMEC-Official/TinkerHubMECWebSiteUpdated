@@ -1,8 +1,8 @@
 .gallery-1 {
   padding: 5%;
-  display: grid;
+  display: flex;
   grid-template-columns: auto auto;
-  grid-gap: 3rem;
+  grid-gap: 2rem;
   /* Compensate for excess margin on outer gallery flex items */
 }
 
