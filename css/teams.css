@@ -40,8 +40,8 @@ justify-content: center;
   }
   .gallery-item-1 {
     display: flex;
-    width: 90%;
-    height: 90%;
+    width: 8%;
+    height: 80%;
     align-items: center;
     box-shadow: none;
     box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
@@ -49,4 +49,10 @@ justify-content: center;
     margin: 0;
     margin-bottom: 40px;
   }
+}
+
+.kick-off{
+  width: auto;
+  height: 100px;
+  align-items: center;
 }
