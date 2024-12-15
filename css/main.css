@@ -1092,6 +1092,12 @@
      justify-items: stretch;
      grid-row-gap: 40px;
    }
+   .main-grid.top-margin-center {
+    margin-top: 60px;
+    justify-items: stretch;
+    grid-row-gap: 40px;
+    margin-left: 200px;
+  }
    
    .promo-video {
      position: relative;
