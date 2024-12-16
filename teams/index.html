@@ -102,7 +102,7 @@
 
 <section id="team">
   <div class="team-heading">
-      <h3>TinkerHub MEC Core Team</h3>
+      <h3>TinkerHub MEC Core</h3>
   </div>
 
 
@@ -364,7 +364,8 @@
       <button id="prevBtn">❮</button>
       <button id="nextBtn">❯</button>
     </div>
-
+    
+    
     <div>
       <h2>Tech Team</h2>
     </div>
@@ -724,78 +725,123 @@
   
   
   <!-- Carousel Script -->
-  <script>
-  const track = document.querySelector('.carousel-track');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const cards = document.querySelectorAll('.contact-card');
-  
-  let currentIndex = 0;
-  const cardWidth = cards[0].offsetWidth + 20; // Card width + margin
-  const totalCards = cards.length;
-  
-  // Create a complete clone of the entire carousel
-  function setupCarousel() {
-      // Remove any existing cloned cards first
-      const existingClones = track.querySelectorAll('.cloned-card');
-      existingClones.forEach(clone => clone.remove());
-  
-      // Clone all original cards
-      const originalCardsArray = Array.from(cards);
-      
-      // Add a complete set of cloned cards at the end
-      originalCardsArray.forEach(card => {
-          const clonedCard = card.cloneNode(true);
-          clonedCard.classList.add('cloned-card');
-          track.appendChild(clonedCard);
-      });
-  
-      // Adjust initial position
-      track.style.transition = 'transform 0.3s ease';
-      track.style.transform = `translateX(0px)`;
-  }
-  
-  // Initialize the carousel
-  setupCarousel();
-  
-  // Move to the next card
-  nextBtn.addEventListener('click', () => {
-      currentIndex++;
-      track.style.transition = 'transform 0.3s ease';
-      track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
-  
-      // When we reach the end of original cards
-      if (currentIndex >= totalCards) {
-          setTimeout(() => {
-              track.style.transition = 'none';
-              currentIndex = 0;
-              track.style.transform = `translateX(0px)`;
-          }, 300);
-      }
-  });
-  
-  // Move to the previous card
-  prevBtn.addEventListener('click', () => {
-      // If at the beginning, jump to the end of the original cards
-      if (currentIndex === 0) {
-          track.style.transition = 'none';
-          currentIndex = totalCards;
-          track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
-          
-          // Wait a moment, then enable smooth transition
-          setTimeout(() => {
-              track.style.transition = 'transform 0.3s ease';
-              currentIndex--;
-              track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
-          }, 50);
-      } else {
-          currentIndex--;
-          track.style.transition = 'transform 0.3s ease';
-          track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
-      }
-  });
-  </script>
-  
+<script>
+// Select all carousel containers
+const carousels = document.querySelectorAll('.carousel-container');
+
+// Loop through each carousel
+carousels.forEach((carousel) => {
+    const track = carousel.querySelector('.carousel-track');
+    const prevBtn = carousel.querySelector('#prevBtn');
+    const nextBtn = carousel.querySelector('#nextBtn');
+    const cards = track.querySelectorAll('.contact-card');
+
+    let currentIndex = 0;
+    const cardWidth = cards[0].offsetWidth + 20; // Card width + margin
+    const totalCards = cards.length;
+    let isTransitioning = false;
+
+    // Setup the carousel by creating an infinite loop
+    function setupCarousel() {
+        // Clone the first and last 4 cards, but only if we have enough cards
+        const firstCardClones = Array.from(cards).slice(0, Math.min(4, totalCards)).map(card => {
+            const clone = card.cloneNode(true);
+            clone.classList.add('cloned-card');
+            return clone;
+        });
+
+        const lastCardClones = Array.from(cards).slice(-Math.min(4, totalCards)).map(card => {
+            const clone = card.cloneNode(true);
+            clone.classList.add('cloned-card');
+            return clone;
+        });
+
+        // Prepend last card clones and append first card clones
+        lastCardClones.reverse().forEach(clone => track.prepend(clone));
+        firstCardClones.forEach(clone => track.appendChild(clone));
+
+        // Initial positioning without transition
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${-3 * cardWidth}px)`;  // Adjust for starting position of 3 cards
+        currentIndex = 3; // Start at the first original card
+    }
+
+    // Initialize the carousel
+    setupCarousel();
+
+    // Move to the next set of cards (3 at a time)
+    function moveNext() {
+        if (isTransitioning) return;
+
+        isTransitioning = true;
+        currentIndex += 3; // Move 3 cards at a time
+
+        // Apply the transition for the next set of 3 cards
+        track.style.transition = 'transform 0.6s ease'; // Slow down transition to 0.6s for smoother effect
+        track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
+
+        // Check if we've reached beyond the original cards
+        if (currentIndex >= totalCards + 3) {
+            setTimeout(() => {
+                // Reset position without transition
+                track.style.transition = 'none';
+                currentIndex = 3; // Reset to first original card
+                const resetOffset = -20;  // Tweak this value to adjust alignment after resetting
+                track.style.transform = `translateX(${-currentIndex * cardWidth + resetOffset}px)`;  // Adjust position after reset
+
+                // Allow next click to trigger the transition
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 0);
+            }, 600); // Match the new transition duration
+        } else {
+            // Transition normally if we're still within bounds
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600); // Match the new transition duration
+        }
+    }
+
+    // Move to the previous set of cards (3 at a time)
+    function movePrev() {
+        if (isTransitioning) return;
+
+        isTransitioning = true;
+        currentIndex -= 3; // Move 3 cards at a time
+
+        // Apply the transition for the previous set of 3 cards
+        track.style.transition = 'transform 0.6s ease'; // Slow down transition to 0.6s for smoother effect
+        track.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
+
+        // Check if we've gone before the original cards
+        if (currentIndex < 0) {
+            setTimeout(() => {
+                // Reset position without transition
+                track.style.transition = 'none';
+                currentIndex = totalCards; // Reset to last original card
+                track.style.transform = `translateX(${-currentIndex * cardWidth}px)`; // Reset position
+
+                // Allow previous click to trigger the transition
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 0);
+            }, 600); // Match the new transition duration
+        } else {
+            // Transition normally if we're still within bounds
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600); // Match the new transition duration
+        }
+    }
+
+    // Event listeners for navigation
+    nextBtn.addEventListener('click', moveNext);
+    prevBtn.addEventListener('click', movePrev);
+});
+</script>
+
+    
+    
 
 <!--carousal test-->
 <!-- <section class="container1">
@@ -887,6 +933,7 @@
        grabCursor: true,
        centeredSlides: true,
        slidesPerView: "auto",
+       initialSlide: 2,
        coverflowEffect: {
          rotate: 20,
          stretch: -20,
@@ -896,6 +943,7 @@
        }
      });
    </script>
+   
 </body>
 
 </html>

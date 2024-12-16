@@ -63,6 +63,7 @@ body {
 }
 
 .contact-card {
+    margin: 10px 20px;
     background-color: #444;
     border-radius: 10px;
     color: #ddd;
@@ -73,7 +74,8 @@ body {
 }
 
 .contact-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.1); /* Expand the card */
+    z-index: 10;
 }
 
 .contact-card img {
@@ -161,12 +163,18 @@ body {
 .carousel-container {
     width: 100%; /* Adjust as needed */
     overflow: hidden;
+    padding: 20px;
     position: relative;
+    margin-bottom: 75px;
   }
   
   /* The scrolling track */
   .carousel-track {
     display: flex;
+    margin: 0 50px ;
+    gap :60px;
+    transition: transform 0.3s ease;
+    will-change: transform;
     animation: scroll 10s linear infinite; /* Infinite scroll animation */
   }
   
@@ -177,7 +185,9 @@ body {
     margin: 0 10px; /* Spacing between cards */
     text-align: center;
     background: #444;
-    
+    position : relative;
+    transition: transform 0.3s ease,z-index 0.3s;
+    z-index: 1;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 15px;
     background-color: #444;
@@ -209,11 +219,14 @@ body {
 }
 
 #prevBtn {
-  left: 10px;
+  left: 0px;
+  border-radius: 10px;
 }
 
 #nextBtn {
-  right: 10px;
+  right: 0px;
+  border-radius: 10px;
+  margin: 0%;
 }
 
 #prevBtn:hover, #nextBtn:hover {
