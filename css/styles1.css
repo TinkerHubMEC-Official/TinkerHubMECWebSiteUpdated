@@ -42,7 +42,7 @@ body {
     transition: color 0.3s ease;
 }
 
-.social-icons i:hover {
+social-icons i:hover {
     color: #007bff;
 }
 
@@ -55,6 +55,7 @@ body {
 }
 
 .contact-container {
+    padding-top: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -79,8 +80,8 @@ body {
 }
 
 .contact-card img {
-    width: 80px;
-    height: 80px;
+    width: 150px; /* Increase the width */
+    height: 150px; /* Increase the height */
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -171,7 +172,8 @@ body {
   /* The scrolling track */
   .carousel-track {
     display: flex;
-    margin: 0 50px ;
+    margin: 0 auto; /* Center the track */
+    width: 80%; /* Decrease the width */
     gap :60px;
     transition: transform 0.3s ease;
     will-change: transform;
@@ -197,9 +199,9 @@ body {
 
   }
   
-  .contact-card img {
-    width: 80px;
-    height: 80px;
+  .carousel-container .contact-card img {
+    width: 150px; /* Increase the width */
+    height: 150px; /* Increase the height */
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
