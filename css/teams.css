@@ -9,8 +9,10 @@
 .gallery-item-1 {
     align-items: center;
     box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
-justify-content: center;
+    justify-content: center;
     margin: 0;
+    width: 20%; /* Increase the width */
+    height: auto; /* Adjust height to maintain aspect ratio */
 }
 
 .gallery-image-1 {
@@ -40,12 +42,12 @@ justify-content: center;
   }
   .gallery-item-1 {
     display: flex;
-    width: 8%;
-    height: 80%;
+    width: 40%; /* Increase the width for smaller screens */
+    height: auto; /* Adjust height to maintain aspect ratio */
     align-items: center;
     box-shadow: none;
     box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
-justify-content: center;
+    justify-content: center;
     margin: 0;
     margin-bottom: 40px;
   }
@@ -61,7 +63,7 @@ justify-content: center;
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: poppins;
+  font-family: Inter, sans-serif;
 }
 
 a{
@@ -115,7 +117,7 @@ a{
   height: 100%;
   object-fit: contain;
   object-position: bottom;
-  filter: grayscale(1);
+  
 }
 
 .t-b-text{
